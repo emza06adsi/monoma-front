@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { Card, Grid } from "./Pokemon.style";
 
 export const Pokemon = () => {
   const [pokemones, setPokemones]: any = useState([]);
@@ -17,18 +19,16 @@ export const Pokemon = () => {
 
   if (pokemonesSet)
     return (
-      <div>
+      <Grid>
         {pokemones.results.map((a: any) => {
-          //   console.log(a);
-
           return (
-            <div style={{border:'1px solid black'}}>
+            <Card>
+              <PokemoneImage url={a.url} />
               <h1>{a.name}</h1>
-              <PokemoneImage url={a.url} />;
-            </div>
+            </Card>
           );
         })}
-      </div>
+      </Grid>
     );
   else return <div>recuperando datos...</div>;
 };
@@ -49,7 +49,5 @@ const PokemoneImage = (props: any) => {
       });
   }, []);
 
-  //   if (pokemonesSet) {
   return <img src={image} width={50} height={50} alt="" />;
-  //   } else return <div>recuperando datos...</div>;
 };
