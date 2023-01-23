@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Card, Grid } from "./card.style";
+import { Card, Grid } from "./cardList.style";
 import Modal from "react-modal";
+
 const customStyles = {
   content: {
     top: "50%",
@@ -12,6 +13,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
+
 export const CardList = () => {
   const [pokemones, setPokemones]: any = useState([]);
   const [pokemonesSet, setPokemonesSet] = useState(false);
