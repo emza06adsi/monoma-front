@@ -11,7 +11,6 @@ export const CardList = (props: any) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // const getItems = async () => {
     var xxx: any = [];
     props.results.map(async (result: any) => {
       const { data } = await axios.get(result.url);
@@ -56,21 +55,3 @@ export const CardList = (props: any) => {
     );
   else return <div>recuperando datos...</div>;
 };
-
-// const PokemoneImage = (props: any) => {
-//   const [image, setImage]: any = useState("");
-//   const [pokemonesSet, setPokemonesSet] = useState(false);
-
-//   useEffect(() => {
-//     fetch(props.url)
-//       .then((response) => {
-//         return response.json();
-//       })
-//       .then((articulos) => {
-//         setImage(articulos.sprites.other.dream_world.front_default);
-//         setPokemonesSet(true);
-//       });
-//   }, []);
-
-//   return <img src={image} width={100} height={100} alt="" />;
-// };
