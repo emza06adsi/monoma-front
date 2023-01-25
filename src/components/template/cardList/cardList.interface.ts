@@ -2,6 +2,9 @@ import { IResult } from "../../pages/pokemon/Pokemon.interface";
 
 export interface IcardLIst {
   results?: IResult[];
+  setOffset: Function;
+  offset: number;
+  count: number;
 }
 export interface IdreamWorld {
   front_default?: string;
