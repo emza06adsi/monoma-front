@@ -1,4 +1,6 @@
-import {HeaderComponent} from './header.style'
-const Header = () => <HeaderComponent>Header Component</HeaderComponent>;
+import { HeaderComponent } from "./header.style";
+const Header = (props: any) => (
+  <HeaderComponent>{props?.user?.email}</HeaderComponent>
+);
 
 export default Header;

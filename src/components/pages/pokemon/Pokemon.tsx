@@ -3,26 +3,27 @@ import { CardList } from "../../template/cardList/cardList";
 
 import { HeaderComponent } from "../../template/header/header.style";
 import Header from "../../template/header/header";
-export const Pokemon = () => {
-  const [pokemones, setPokemones]: any = useState([]);
-  const [pokemonesSet, setPokemonesSet] = useState(false);
+import { IResult, Iuser } from "./Pokemon.interface";
+
+export const Pokemon = ({ user }: Iuser) => {
+  const [pokemones, setPokemones] = useState<IResult[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     fetch("https://pokeapi.co/api/v2/pokemon/")
       .then((response) => {
         return response.json();
       })
-      .then((articulos) => {
-        // debugger;
-        setPokemones(articulos.results);
-        setPokemonesSet(true);
+      .then((res) => {
+        setPokemones(res.results);
+        setLoading(true);
       });
   }, []);
 
-  if (pokemonesSet)
+  if (loading)
     return (
       <div>
-        <Header></Header>
+        <Header user={user}></Header>
         <CardList results={pokemones}></CardList>
       </div>
     );

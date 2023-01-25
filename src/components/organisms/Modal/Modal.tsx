@@ -11,6 +11,7 @@ import {
 } from "./Modal.style";
 
 import Modal from "react-modal";
+import { Idata } from "../../template/cardList/cardList.interface";
 const customStyles = {
   content: {
     top: "50%",
@@ -19,33 +20,29 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "650px",
+    height: "600px",
     borderRadius: 50,
     border: "none",
     boxShadow: " 0 4px 10px black",
   },
 };
 
-export const PokeModal = (props: any) => {
-  const [image, setImage] = useState(true);
-  let subtitle: any;
+interface IPokeModal {
+  modal: Idata[];
+  modalIsOpen: boolean;
+  setIsOpen: Function;
+}
 
-  const openModal = () => {
-    props.setIsOpen(true);
-  };
-
-  const afterOpenModal = () => {
-    subtitle.style.color = "#f00";
-  };
+export const PokeModal = ({ modal, modalIsOpen, setIsOpen }: IPokeModal) => {
+  const [image, setImage] = useState<boolean>(true);
 
   const closeModal = () => {
-    props.setIsOpen(false);
+    setIsOpen(false);
   };
 
   return (
     <Modal
-      isOpen={props.modalIsOpen}
-      onAfterOpen={afterOpenModal}
+      isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal"
@@ -54,32 +51,30 @@ export const PokeModal = (props: any) => {
         <img
           src={
             image
-              ? props.modal[0].sprites.other.home.front_default
-              : props.modal[0].sprites.other.home.front_shiny
+              ? modal[0].sprites.other.home.front_default
+              : modal[0].sprites.other.home.front_shiny
           }
           width={400}
           height={300}
           alt=""
         />
         <Header>
-          <Ability>
-            Ability - {props.modal[0].abilities[0].ability.name}
-          </Ability>
+          <Ability>Ability - {modal[0].abilities[0].ability.name}</Ability>
           <Weight
             onClick={() => {
               setImage(!image);
             }}
           >
-            {props.modal[0].weight}
+            {modal[0].weight}
           </Weight>
         </Header>
 
         <Main>
-          <Name>{props.modal[0].name}</Name>
+          <Name>{modal[0].name}</Name>
         </Main>
         <Tags>
-          <Move>#{props.modal[0].moves[1].move.name}</Move>
-          <Move>#{props.modal[0].moves[0].move.name}</Move>
+          <Move>#{modal[0].moves[1].move.name}</Move>
+          <Move>#{modal[0].moves[0].move.name}</Move>
         </Tags>
       </ContainerIMage>
     </Modal>

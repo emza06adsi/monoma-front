@@ -1,10 +1,34 @@
 import { Button, Form, Input, LoginContainer } from "./login.style";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Data, User } from "./login.interface";
 
-const Login = () => {
-  const [email, setEmail]: any = useState("");
-  const [password, setPassword]: any = useState("");
+const Login = ({ setUser }: User) => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  let navigate = useNavigate();
+
+  const handleCLick = async () => {
+    const header = {
+      "Content-Type": "application/json",
+    };
+    const object = {
+      email: "estebanmezabetancur@gmail.com",
+      password: "qwe3002950",
+    };
+    try {
+      const {
+        data: { token, UserProfile },
+      }: Data = await axios.post("http://localhost:8080/login", object);
+
+      setUser(UserProfile);
+      sessionStorage.setItem("token", token);
+      navigate("/grid");
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   return (
     <LoginContainer>
@@ -17,7 +41,6 @@ const Login = () => {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            console.log(email);
           }}
           type="text"
           placeholder="name"
@@ -32,49 +55,7 @@ const Login = () => {
           placeholder="password"
         />
       </Form>
-      <Button
-        onClick={async () => {
-          try {
-            const data = await axios.get("http://localhost:3000/users", {
-              headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json",
-              },
-            });
-            // const data = await axios.post(
-            //   "http://localhost:3000/user/login",
-
-            //   {
-            //     data: {
-            //       email: "estebanmezabetancur@gmail.com",
-            //       password: "qwe3002950",
-            //     },
-            //     mode: "cors",
-            //     // headers: {
-            //     //   "Access-Control-Allow-Origin": "*",
-            //     //   "Content-Type": "application/json",
-            //     // },
-            //     headers: {
-            //       "Access-Control-Allow-Origin": "*",
-            //       "Access-Control-Allow-Methods":
-            //         "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-            //       "Content-Type": "application/json",
-            //       "accept-Encoding": "application/json",
-            //       "Access-Control-Allow-Headers": "*",
-            //       "Access-Control-Allow-Credentials": "true",
-            //     },
-            //   }
-            // );
-            console.log(data);
-          } catch (error) {
-            console.log("error ");
-            console.log(error);
-            console.log("error ");
-          }
-        }}
-      >
-        summit
-      </Button>
+      <Button onClick={handleCLick}>submit</Button>
     </LoginContainer>
   );
 };
