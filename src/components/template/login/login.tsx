@@ -14,7 +14,7 @@ const Login = ({ setUser }: User) => {
       "Content-Type": "application/json",
     };
     const object = {
-      email: "estebanmezabetancur@gmail.com",
+      email: "emezab07@gmail.com",
       password: "qwe3002950",
     };
     try {

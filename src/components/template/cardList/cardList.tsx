@@ -52,8 +52,7 @@ export const CardList = ({ results, setOffset, offset, count }: IcardLIst) => {
           )}
         </div>
         <ControlView>
-          <p>count: {parseInt(""+count / 9)}</p>
-          {/* <div>ddd</div> */}
+          <p>count: {parseInt("" + count / 9)}</p>
           <Button
             onClick={() => {
               setOffset(offset - 9);
