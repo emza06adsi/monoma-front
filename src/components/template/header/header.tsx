@@ -9,10 +9,13 @@ const Header = (props: any) => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.post("http://localhost:8080/user", {
-        id: props?.user?.name,
-        token: sessionStorage.getItem("token"),
-      });
+      const { data } = await axios.post(
+        process.env.REACT_APP_API_URL + "/user",
+        {
+          id: props?.user?.name,
+          token: sessionStorage.getItem("token"),
+        }
+      );
       console.log(data);
       setUserData(data);
     })();

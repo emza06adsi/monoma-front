@@ -14,13 +14,16 @@ const Login = ({ setUser }: User) => {
       "Content-Type": "application/json",
     };
     const object = {
-      email: "emezab07@gmail.com",
-      password: "qwe3002950",
+      email: email,
+      password: password,
     };
     try {
       const {
         data: { token, UserProfile },
-      }: Data = await axios.post("http://localhost:8080/login", object);
+      }: Data = await axios.post(
+        process.env.REACT_APP_API_URL + "/login",
+        object
+      );
 
       setUser(UserProfile);
       sessionStorage.setItem("token", token);
@@ -51,7 +54,7 @@ const Login = ({ setUser }: User) => {
             setPassword(e.target.value);
             console.log(password);
           }}
-          type="text"
+          type="password"
           placeholder="password"
         />
       </Form>

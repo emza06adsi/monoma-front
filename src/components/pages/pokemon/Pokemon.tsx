@@ -11,7 +11,7 @@ export const Pokemon = ({ user }: Iuser) => {
   const [offset, setOffset] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=9`)
+    fetch(process.env.REACT_APP_POKE_API_URL+`/?offset=${offset}&limit=9`)
       .then((response) => {
         return response.json();
       })
