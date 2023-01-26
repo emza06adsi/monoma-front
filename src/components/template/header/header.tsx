@@ -16,7 +16,6 @@ const Header = (props: any) => {
           token: sessionStorage.getItem("token"),
         }
       );
-      console.log(data);
       setUserData(data);
     })();
   }, []);

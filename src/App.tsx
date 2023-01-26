@@ -13,16 +13,30 @@ export interface User {
 function App() {
   const [user, setUser] = useState<User>();
 
-  return (
-    <div>
+  if (
+    sessionStorage.getItem("token") === null ||
+    sessionStorage.getItem("token") === ""
+  ) {
+    return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login setUser={setUser} />} />
+          <Route path="/" element={<Login setUser={setUser} />} />;
+          {/* <Route element={<Login setUser={setUser} />} />; */}
+          <Route path="*" element={<Login setUser={setUser} />} />
+          {/* <Route element={<Login setUser={setUser} />} />; */}
+        </Routes>
+      </BrowserRouter>
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login setUser={setUser} />} />;
           <Route path="/grid" element={<Pokemon user={user} />} />
         </Routes>
       </BrowserRouter>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

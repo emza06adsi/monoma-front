@@ -18,7 +18,6 @@ export const Pokemon = ({ user }: Iuser) => {
       .then((res) => {
         setPokemones(res.results);
         setCount(res.count);
-        console.log(pokemones);
 
         setLoading(true);
       });

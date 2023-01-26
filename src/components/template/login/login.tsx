@@ -1,4 +1,11 @@
-import { Button, Form, Input, LoginContainer } from "./login.style";
+import {
+  Button,
+  Form,
+  Input,
+  LoginContainer,
+  PasswordButton,
+  PasswordInput,
+} from "./login.style";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +14,7 @@ import { Data, User } from "./login.interface";
 const Login = ({ setUser }: User) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [tipePassword, setTipePassword] = useState<boolean>(false);
   let navigate = useNavigate();
 
   const handleCLick = async () => {
@@ -45,18 +53,26 @@ const Login = ({ setUser }: User) => {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-          type="text"
+          type="email"
           placeholder="name"
         />
-        <Input
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            console.log(password);
-          }}
-          type="password"
-          placeholder="password"
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <PasswordInput
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            type={tipePassword ? "text" : "password"}
+            placeholder="password"
+          />
+          <PasswordButton
+            onClick={() => {
+              setTipePassword(!tipePassword);
+            }}
+          >
+            ...
+          </PasswordButton>
+        </div>
       </Form>
       <Button onClick={handleCLick}>submit</Button>
     </LoginContainer>
